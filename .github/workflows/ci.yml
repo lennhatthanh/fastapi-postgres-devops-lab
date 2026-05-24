@@ -21,3 +21,16 @@ jobs:
 
       - name: Build services
         run: docker compose build
+
+      - name: Start services
+        run: docker compose up -d
+      
+      - name: Wait for backend
+        run: sleep 10
+        
+      - name: Test health endpoint
+        run: curl --fail http://localhost:8000/health
+        
+      - name: Show logs on failure
+        if: failure()
+        run: docker compose logs
