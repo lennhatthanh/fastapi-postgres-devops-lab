@@ -26,7 +26,7 @@ jobs:
       - name: Check Docker Compose Dev config
         run: docker compose -f docker-compose.yml -f docker-compose.dev.yml config
 
-      - name: Check Docker Compose Dev config
+      - name: Check Docker Compose Prod config
         run: docker compose -f docker-compose.yml -f docker-compose.prod.yml config
 
       - name: Build services
@@ -36,7 +36,7 @@ jobs:
         run: docker compose -f docker-compose.yml -f docker-compose.dev.yml up -d
       
       - name: Wait for backend
-        run: sleep 10
+        run: sleep 4
 
       - name: Test health endpoint
         run: curl --fail http://localhost/api/health
@@ -56,8 +56,8 @@ jobs:
 
       - name: Show logs on failure
         if: failure()
-        run: docker compose logs
+        run: docker compose -f docker-compose.yml -f docker-compose.dev.yml logs
 
       - name: Cleanup
         if: always()
-        run: docker compose down -v
+        run: docker compose -f docker-compose.yml -f docker-compose.dev.yml down -v
