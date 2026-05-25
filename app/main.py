@@ -39,7 +39,7 @@ def start():
 
 @app.get("/health")
 def health():
-    return {"status": False}
+    return {"status": "ok"}
 
 
 @app.get("/students")
