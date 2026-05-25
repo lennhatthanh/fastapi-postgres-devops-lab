@@ -24,16 +24,16 @@ jobs:
           DB_PASSWORD=123456
           EOF
       - name: Check Docker Compose Dev config
-        run: docker compose -f docker-compose.dev -f docker-compose.dev.yml config
+        run: docker compose -f docker-compose.yml -f docker-compose.dev.yml config
 
       - name: Check Docker Compose Dev config
-        run: docker compose -f docker-compose.dev -f docker-compose.prod.yml config
+        run: docker compose -f docker-compose.yml -f docker-compose.prod.yml config
 
       - name: Build services
-        run: docker compose -f docker-compose.dev -f docker-compose.dev.yml build
+        run: docker compose -f docker-compose.yml -f docker-compose.dev.yml build
 
       - name: Start services
-        run: docker compose -f docker-compose.dev -f docker-compose.dev.yml up -d
+        run: docker compose -f docker-compose.yml -f docker-compose.dev.yml up -d
       
       - name: Wait for backend
         run: sleep 10
